@@ -24,11 +24,25 @@ class Content extends Model
         'section_2' => 'Section 2',
     ];
 
+    public static $arrType = [
+        'post' => 'Post',
+        'video' => 'Video',
+    ];
+
 
     public function user()
     {
         return $this->belongsTo('App\User', 'user_id');
     }
+
+
+    public function getImageAttribute($value)
+    {
+        return !$value ?: url('storage/'.$value);
+    }
+
+
+
 
 
 

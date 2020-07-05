@@ -44,6 +44,14 @@ class User extends Authenticatable
     }
 
 
+    public static function booted()
+    {
+        static::deleting(function ($user){
+           $user->contents()->delete();
+        });
+    }
+
+
 
 
 

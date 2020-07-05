@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Content;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ContentController extends Controller
 {
@@ -13,7 +15,9 @@ class ContentController extends Controller
      */
     public function index()
     {
-        //
+        $contents = Content::all();
+//        return $contents;
+        return view('content.index', compact($contents));
     }
 
     /**
@@ -23,6 +27,9 @@ class ContentController extends Controller
      */
     public function create()
     {
+        $data['section'] = Content::$arrSection;
+        return view('content.create', compact('data'));
+
 
     }
 
@@ -34,7 +41,25 @@ class ContentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'type' => 'required|in:post,video',
+            'title' => 'required|string|max:255|unique:contents,title',
+            'body' => 'required|string|min:20',
+            'section' => 'required|string',
+            'youtube_link' => 'exclude_if:type,post|url',
+            'image' => 'required_if:type,post|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+
+        $input = $request->except('image');
+        $input['slug'] = Str::slug( $request->title, '_');
+        if ($request->type == 'post' && $request->has('image'))
+            $input['image'] = $request->image->store('uploads', 'public');
+
+        $request->user()->contents()->create( $input);
+//        $content = Content::create($input);
+
+        return redirect('contents')->with('success', 'Content Created Successfully');
     }
 
     /**

@@ -18,6 +18,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    @yield('style')
 </head>
 <body>
     <div id="app">
@@ -36,15 +38,15 @@
                         @auth
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    Posts<span class="caret"></span>
+                                    Contents<span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}">
-                                        All Posts
+                                    <a class="dropdown-item" href="{{ url('contents') }}">
+                                        All Contents
                                     </a>
-                                    <a class="dropdown-item" href="">
-                                        Create Post
+                                    <a class="dropdown-item" href="{{ url('contents/create') }}">
+                                        Add Content
                                     </a>
                                 </div>
                             </li>
@@ -96,6 +98,7 @@
 
     </div>
 </body>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
 
 @yield('script')
 

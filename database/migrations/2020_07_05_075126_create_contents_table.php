@@ -18,7 +18,7 @@ class CreateContentsTable extends Migration
             $table->string('title');
             $table->string('type');
             $table->string('section');
-            $table->string('status');
+            $table->string('status')->default('publish');
             $table->string('slug');
             $table->text('image')->nullable();
             $table->text('youtube_link')->nullable();
