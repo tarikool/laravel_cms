@@ -20,7 +20,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-Route::get('contents/list', 'ContentController@list');
 Route::get('contents', 'ContentController@index');
-Route::get('contents/{content:slug}', 'ContentController@show');
 Route::resource('contents', 'ContentController')->except(['index', 'show']);
+Route::get('contents/list', 'ContentController@list');
+Route::get('contents/{content:slug}', 'ContentController@show');

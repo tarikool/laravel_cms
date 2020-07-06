@@ -10,10 +10,12 @@
                 </div>
 
                 <div class="row">
-                    @foreach( $contents['section_1'] as $content )
-                        @include('include.section1', ['loop' => $loop, 'content' => $content])
-{{--                        {{ $loop->iteration.' remaining :' .$loop->remaining. ' index: '.$loop->index.' mod: '. ($loop->index%5).'image'. $content->image }}<br>--}}
-                    @endforeach
+                    @isset($contents['section_1'])
+                        @foreach( $contents['section_1'] as $content )
+                            @include('include.section1', ['loop' => $loop, 'content' => $content])
+                            {{--                        {{ $loop->iteration.' remaining :' .$loop->remaining. ' index: '.$loop->index.' mod: '. ($loop->index%5).'image'. $content->image }}<br>--}}
+                        @endforeach
+                    @endisset
                 </div>
             </div>
 
@@ -22,10 +24,12 @@
                     <code>Section 2</code>
                 </div>
                 <div class="row">
-                    @foreach( $contents['section_2'] as $content )
-                        @include('include.section2', ['loop' => $loop, 'content' => $content])
-{{--                        {{ $loop->iteration.' remaining :' .$loop->remaining. ' mod: '. $loop->index%3 }} <br>--}}
-                    @endforeach
+                    @isset($contents['section_2'])
+                        @foreach( $contents['section_2'] as $content )
+                            @include('include.section2', ['loop' => $loop, 'content' => $content])
+                            {{--                        {{ $loop->iteration.' remaining :' .$loop->remaining. ' mod: '. $loop->index%3 }} <br>--}}
+                        @endforeach
+                    @endisset
 
                 </div>
             </div>
