@@ -47,9 +47,4 @@ class Content extends Model
 
 
 
-
-
-
-
-
 }

@@ -12,3 +12,16 @@
         {{ $footer }}
     </footer>
 </div>
+
+
+<x-sidebar>
+    <x-slot name="avatar">
+        <img src="/image/user-avatar.png" />
+    </x-slot>
+
+    <ul>
+        <li>Home</li>
+        <li>Articles</li>
+        <li>About</li>
+    </ul>
+</x-sidebar>

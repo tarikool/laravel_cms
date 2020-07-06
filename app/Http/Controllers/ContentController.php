@@ -8,6 +8,12 @@ use Illuminate\Support\Str;
 
 class ContentController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['index', 'show']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,15 +21,27 @@ class ContentController extends Controller
      */
     public function index()
     {
-        $contents = Content::get()->map(function ($item){
+        $contents = Content::get()->filter(function ($item){
+            return $item->status == 'publish';
+        })->map(function ($item){
             $item->title = Str::limit($item->title, 15);
             $item->body = Str::limit($item->body, 30);
             return $item;
         })->groupBy('section');
 
-//        return $contents['section_1'];
-
         return view('content.index', compact('contents'));
+    }
+
+
+    public function list()
+    {
+        $contents = Content::get()->map(function ($item){
+            $item->title = Str::limit($item->title, 30);
+            $item->body = Str::limit($item->body, 60);
+            return $item;
+        });
+        return view('content.list', compact('contents'));
+
     }
 
     /**
@@ -74,9 +92,9 @@ class ContentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Content $content)
     {
-        //
+        return view('content.show', compact('content'));
     }
 
     /**
@@ -85,9 +103,11 @@ class ContentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Content $content)
     {
-        //
+        $content->status = $content->status == 'publish' ? 'unpublish' : 'publish';
+        $content->save();
+        return redirect('contents/list')->with('success', 'Operation Successful!');
     }
 
     /**

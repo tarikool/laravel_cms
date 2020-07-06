@@ -7,11 +7,25 @@
         <div class="row">
 @endif
 
-<div class="col-md-6 {{ !$loop->index%5 ? 'section1' : '' }}">
-    <img class="{{ $class }}" src="{{ $content->image }}">
+<div class="col-md-6 {{ $loop->index%5 == 0 ? 'section1' : '' }}">
+    @if($content->type == 'post')
+        <a href="{{ url('contents/'.$content->slug) }}"><img class="{{ $class }}" src="{{ $content->image }}"></a>
+    @else
+        <x-video>
+            <x-slot name="class">
+                {{ $class }}
+            </x-slot>
+            {{ $content->youtube_link }}
+        </x-video>
+    @endif
+
     <div class="content">
-        <span class="text-muted content-tile">{{ $content->title }}</span><br>
-        <span class="content-body">{{ $content->body }}</span>
+        <a href="{{ url('contents/'.$content->slug) }}">
+            <span class="text-muted content-tile">{{ $content->title }}</span><br>
+        </a>
+        <a href="{{ url('contents/'.$content->slug) }}">
+            <span class="content-body">{{ $content->body }}</span>
+        </a>
     </div>
 </div>
 

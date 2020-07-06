@@ -17,8 +17,9 @@
 }
 
 .section1{
-    margin-bottom: 70px;
-    margin-top: 30px;
+    margin-bottom: 100px;
+    /*margin-top: 5px;*/
+    padding-left: 1px;
 }
 
 .section2{
@@ -31,3 +32,6 @@
     padding-right: 11px;
 
 }
+
+
+

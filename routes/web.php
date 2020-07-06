@@ -13,14 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-//    return view('welcome');
-    return view('content.index');
-});
+Route::get('/', 'ContentController@index');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-Route::resource('contents', 'ContentController')->middleware('auth');
+Route::get('contents/list', 'ContentController@list');
+Route::get('contents', 'ContentController@index');
+Route::get('contents/{content:slug}', 'ContentController@show');
+Route::resource('contents', 'ContentController')->except(['index', 'show']);
