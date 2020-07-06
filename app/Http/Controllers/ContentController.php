@@ -15,9 +15,15 @@ class ContentController extends Controller
      */
     public function index()
     {
-        $contents = Content::all();
-//        return $contents;
-        return view('content.index', compact($contents));
+        $contents = Content::get()->map(function ($item){
+            $item->title = Str::limit($item->title, 15);
+            $item->body = Str::limit($item->body, 30);
+            return $item;
+        })->groupBy('section');
+
+//        return $contents['section_1'];
+
+        return view('content.index', compact('contents'));
     }
 
     /**

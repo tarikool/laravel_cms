@@ -1,0 +1,33 @@
+.section_1A{
+    height: 250px;
+    width: 330px;
+}
+.section_1B{
+    height: 110px;
+    width: 160px;
+}
+
+.section_2A{
+    height: 250px;
+    width: 100%;
+}
+.section_2B{
+    height: 110px;
+    width: 100%;
+}
+
+.section1{
+    margin-bottom: 70px;
+    margin-top: 30px;
+}
+
+.section2{
+    margin-bottom: 32px;
+}
+
+
+.content{
+    padding-left: 13px;
+    padding-right: 11px;
+
+}
